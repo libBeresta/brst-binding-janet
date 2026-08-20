@@ -54,6 +54,9 @@
 
 # Подгружаем CMake
 (jnt/require-cmake)
+(jnt/require-git)
+
+(jnt/git "clone" "https://github.com/libBeresta/libBeresta.git" "ext/libBeresta")
 
 # Папка сборки
 (def- brst-build-dir (path/join "_build"))
