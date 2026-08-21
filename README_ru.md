@@ -88,6 +88,52 @@ janet minimal.janet
 
 После каждого запуска должен формироваться соответствующий файл `*.pdf`
 
+## Использование как зависимость Janet
+
+Возможно использование библиотеки как зависимость в Janet bundle.
+
+Создайте папку проекта и папку `bundle`
+
+```sh
+mkdir -p prj/bundle
+```
+
+Создайте файл `prj/bundle/info.jdn` со следующим содержанием:
+
+```
+@{:author "Your Name"
+  :description "libBeresta test"
+  :license "MIT"
+  :jpm-dependencies @["spork"
+                      {:url "https://github.com/libBeresta/brst-binding-janet.git"}
+                      {:url "https://github.com/rwtolbert/janet-native-tools.git" :tag "0.2.0"}]
+  :name "brst-test"
+  :version "1.0.1"}
+
+```
+Создайте файл `prj/bundle/info.jdn` со следующим содержанием:
+
+```
+(use brst)
+
+(with-pdf-document pdf "minimal.pdf"
+  (let [page (doc-page-add pdf)]
+    (page-setsize page
+                  page-size-a4
+                  page-orientation-landscape)))
+
+```
+
+Выполните команды
+
+```
+cd prj
+janet-pm deps
+janet-pm build
+```
+
+Должен появиться файл `minimal.pdf`. Пользуйтесь!
+
 ## Дальнейшие шаги
 
 Библиотека libBeresta развивается, за прогрессом можно следить
