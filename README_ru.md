@@ -6,7 +6,8 @@
 кросс-платформенная библиотека для генерации PDF-файлов.
 
 Этот репозиторий &ndash; член семейства `brst-binding-<lang>` языковых
-привязок библиотеки `libBeresta`, предназначенный для [Janet][janet].
+привязок библиотеки `libBeresta`, предназначенный для языка [Janet][janet].
+
 Языковые привязки генерируются автоматически
 из&nbps;каноничных определений, представленных в&nbsp;виде S-выражений
 в&nbsp;[`gen/data/*.lsp`][gen-data], обновляемых вместе с&nbsp;библиотекой.
@@ -26,6 +27,74 @@
   файлов языковой привязки, проверки её работоспособности и сборки
   отчуждаемого архива.
 
+Все остальное содержимое (включая этот файл) определяется
+особенностями работы с проектами в [Janet][janet].
+
+## Быстрый старт
+
+### Установка
+Клонируйте репозитории языковой привязки:
+
+```sh
+git clone https://github.com/libBeresta/brst-binding-janet.git
+```
+
+Постройте библиотеку:
+
+```sh
+cd brst-binding-janet
+cmake -S . -B _build -DLIBBRST_SHARED_LIB=OFF
+cmake --build _build
+```
+Имя `_build` важно, оно используется при дальнейшей работе с библиотекой.
+
+### Сборка Janet native
+
+Исходники Janet используют Janet bundle для сборки native.
+
+Соберите и установите Janet bundle:
+
+```sh
+janet-pm build
+janet-pm install
+```
+Будет собрана и установлена в экосистему Janet библиотека с кодом языковой
+привязки.
+
+Теперь можно удостовериться, что все работает:
+
+```sh
+cmake --build _build --target check
+```
+или (что то же самое):
+
+```
+janet-pm test
+```
+
+Должно напечататься сообщение
+
+```
+All tests passed.
+```
+
+### Использование
+
+Теперь можно перейти в папку `demos/` и начать запускать примеры вызовом
+
+```
+janet minimal.janet
+```
+
+После каждого запуска должен формироваться соответствующий файл `*.pdf`
+
+## Дальнейшие шаги
+
+Библиотека libBeresta развивается, за прогрессом можно следить
+в репозитории [https://github.com/libBeresta/libBeresta][libBeresta],
+а также на сайте [libberesta.ru](libberesta.ru).
+
+[libBeresta]: https://github.com/libBeresta/libBeresta
 [gen_readme]: https://github.com/libBeresta/libBeresta/blob/master/gen/README_ru.md
 [gen]: https://github.com/libBeresta/libBeresta/blob/master/gen/
 [org]: https://github.com/libBeresta
