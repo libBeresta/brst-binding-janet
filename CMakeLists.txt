@@ -120,7 +120,8 @@ add_custom_command(
 
 add_custom_command(
   TARGET check
-  COMMAND echo "libBeresta language binding check target"
+  COMMAND janet-pm test
+  WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )
 
 file(READ "version" VER)
