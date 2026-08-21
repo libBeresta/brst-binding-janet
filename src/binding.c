@@ -1,11 +1,3 @@
-//
-// libBeresta
-//
-// Janet native для libBeresta
-//
-// Дмитрий Соломенников, (с) 2026
-//
-
 #include <janet.h>
 #include <brst.h>
 
@@ -171,7 +163,7 @@ static Janet br_Date_Validate(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetFitH(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Destination_SetFitH(dst, top);
   return janet_wrap_integer(ret);
 }
@@ -179,7 +171,7 @@ static Janet br_Destination_SetFitH(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetFitBH(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Destination_SetFitBH(dst, top);
   return janet_wrap_integer(ret);
 }
@@ -194,10 +186,10 @@ static Janet br_Destination_SetFitB(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetFitR(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL bottom = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL right = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL bottom = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL right = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Destination_SetFitR(dst, left, bottom, right, top);
   return janet_wrap_integer(ret);
 }
@@ -205,7 +197,7 @@ static Janet br_Destination_SetFitR(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetFitV(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Destination_SetFitV(dst, left);
   return janet_wrap_integer(ret);
 }
@@ -220,7 +212,7 @@ static Janet br_Destination_SetFit(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetFitBV(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Destination_SetFitBV(dst, left);
   return janet_wrap_integer(ret);
 }
@@ -228,9 +220,9 @@ static Janet br_Destination_SetFitBV(int32_t argc, Janet *argv) {
 static Janet br_Destination_SetXYZ(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Destination dst = (BRST_Destination)janet_getpointer(argv, 0);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL zoom = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL zoom = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Destination_SetXYZ(dst, left, top, zoom);
   return janet_wrap_integer(ret);
 }
@@ -393,8 +385,8 @@ static Janet br_Doc_Matrix_Skew(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Matrix m = (BRST_Matrix)janet_getpointer(argv, 1);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_Matrix ret = BRST_Doc_Matrix_Skew(pdf, m, a, b);
   return janet_wrap_pointer(ret);
 }
@@ -403,8 +395,8 @@ static Janet br_Doc_Matrix_Translate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Matrix m = (BRST_Matrix)janet_getpointer(argv, 1);
-  BRST_REAL dx = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL dy = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL dx = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL dy = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_Matrix ret = BRST_Doc_Matrix_Translate(pdf, m, dx, dy);
   return janet_wrap_pointer(ret);
 }
@@ -413,7 +405,7 @@ static Janet br_Doc_Matrix_RotateDeg(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Matrix m = (BRST_Matrix)janet_getpointer(argv, 1);
-  BRST_REAL degrees = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL degrees = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_Matrix ret = BRST_Doc_Matrix_RotateDeg(pdf, m, degrees);
   return janet_wrap_pointer(ret);
 }
@@ -429,8 +421,8 @@ static Janet br_Doc_Matrix_Scale(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Matrix m = (BRST_Matrix)janet_getpointer(argv, 1);
-  BRST_REAL sx = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL sy = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL sx = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL sy = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_Matrix ret = BRST_Doc_Matrix_Scale(pdf, m, sx, sy);
   return janet_wrap_pointer(ret);
 }
@@ -455,7 +447,7 @@ static Janet br_Doc_Matrix_Rotate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Matrix m = (BRST_Matrix)janet_getpointer(argv, 1);
-  BRST_REAL angle = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL angle = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_Matrix ret = BRST_Doc_Matrix_Rotate(pdf, m, angle);
   return janet_wrap_pointer(ret);
 }
@@ -566,9 +558,9 @@ static Janet br_Doc_Dict_RGBPatternFill_Select(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 6);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Dict dict = (BRST_Dict)janet_getpointer(argv, 1);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_Pattern pattern = (BRST_Pattern)janet_getpointer(argv, 5);
   BRST_STATUS ret = BRST_Doc_Dict_RGBPatternFill_Select(pdf, dict, r, g, b, pattern);
   return janet_wrap_integer(ret);
@@ -578,9 +570,9 @@ static Janet br_Doc_Page_RGBPatternFill_Select(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 6);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 1);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_Pattern pattern = (BRST_Pattern)janet_getpointer(argv, 5);
   BRST_STATUS ret = BRST_Doc_Page_RGBPatternFill_Select(pdf, page, r, g, b, pattern);
   return janet_wrap_integer(ret);
@@ -634,12 +626,12 @@ static Janet br_Doc_Page_RGBPatternFillUint_Select(int32_t argc, Janet *argv) {
 static Janet br_Doc_Pattern_Tiling_New(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 8);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL bottom = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL right = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL xstep = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL ystep = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL bottom = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL right = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL xstep = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL ystep = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_Matrix matrix = (BRST_Matrix)janet_getpointer(argv, 7);
   BRST_Pattern ret = BRST_Doc_Pattern_Tiling_New(pdf, left, bottom, right, top, xstep, ystep, matrix);
   return janet_wrap_pointer(ret);
@@ -749,10 +741,10 @@ static Janet br_Doc_SetOpenAction(int32_t argc, Janet *argv) {
 static Janet br_Doc_XObject_New(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Doc pdf = (BRST_Doc)janet_getpointer(argv, 0);
-  BRST_REAL width = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL height = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL scalex = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL scaley = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL width = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL height = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL scalex = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL scaley = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_XObject ret = BRST_Doc_XObject_New(pdf, width, height, scalex, scaley);
   return janet_wrap_pointer(ret);
 }
@@ -806,7 +798,7 @@ static Janet br_ExtGState_SetBlendMode(int32_t argc, Janet *argv) {
 static Janet br_ExtGState_SetAlphaFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_ExtGState ext_gstate = (BRST_ExtGState)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_ExtGState_SetAlphaFill(ext_gstate, value);
   return janet_wrap_integer(ret);
 }
@@ -814,7 +806,7 @@ static Janet br_ExtGState_SetAlphaFill(int32_t argc, Janet *argv) {
 static Janet br_ExtGState_SetAlphaStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_ExtGState ext_gstate = (BRST_ExtGState)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_ExtGState_SetAlphaStroke(ext_gstate, value);
   return janet_wrap_integer(ret);
 }
@@ -823,7 +815,7 @@ static Janet br_ExtGState_SetAlphaStroke(int32_t argc, Janet *argv) {
 static Janet br_Font_Descent(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Font font = (BRST_Font)janet_getpointer(argv, 0);
-  BRST_REAL font_size = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL font_size = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_REAL ret = BRST_Font_Descent(font, font_size);
   return janet_wrap_number(ret);
 }
@@ -831,9 +823,9 @@ static Janet br_Font_Descent(int32_t argc, Janet *argv) {
 static Janet br_Font_TextWidth2(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Font font = (BRST_Font)janet_getpointer(argv, 0);
-  BRST_REAL font_size = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL word_space = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL char_space = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL font_size = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL word_space = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL char_space = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_CSTR text = (BRST_CSTR)janet_getstring(argv, 4);
   BRST_REAL ret = BRST_Font_TextWidth2(font, font_size, word_space, char_space, text);
   return janet_wrap_number(ret);
@@ -843,11 +835,11 @@ static Janet br_Font_TextWidth2(int32_t argc, Janet *argv) {
 static Janet br_Page_Arc(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 6);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL radius = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL angle1 = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL angle2 = (BRST_REAL)janet_getfloat(argv, 5);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL radius = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL angle1 = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL angle2 = (BRST_REAL)janet_getnumber(argv, 5);
   BRST_STATUS ret = BRST_Page_Arc(page, x, y, radius, angle1, angle2);
   return janet_wrap_integer(ret);
 }
@@ -865,10 +857,10 @@ static Janet br_Page_SetRGBStrokeUint(int32_t argc, Janet *argv) {
 static Janet br_Page_CurveTo3(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x1 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y1 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x1 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y1 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_CurveTo3(page, x1, y1, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -883,8 +875,8 @@ static Janet br_Page_FillColorSpace(int32_t argc, Janet *argv) {
 static Janet br_Page_MoveTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_MoveTo(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -892,10 +884,10 @@ static Janet br_Page_MoveTo(int32_t argc, Janet *argv) {
 static Janet br_Page_Ellipse(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_Ellipse(page, x, y, a, b);
   return janet_wrap_integer(ret);
 }
@@ -910,12 +902,12 @@ static Janet br_Page_LineJoin(int32_t argc, Janet *argv) {
 static Janet br_Page_Concat(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL d = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL d = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Page_Concat(page, a, b, c, d, x, y);
   return janet_wrap_integer(ret);
 }
@@ -930,8 +922,8 @@ static Janet br_Page_Eoclip(int32_t argc, Janet *argv) {
 static Janet br_Page_LineTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_LineTo(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -987,7 +979,7 @@ static Janet br_Page_SetDash(int32_t argc, Janet *argv) {
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
   BRST_DASH_PATTERN dash_pattern = (BRST_DASH_PATTERN)janet_getpointer(argv, 1);
   BRST_UINT num_elem = (BRST_UINT)janet_getuinteger(argv, 2);
-  BRST_REAL phase = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL phase = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Page_SetDash(page, dash_pattern, num_elem, phase);
   return janet_wrap_integer(ret);
 }
@@ -1010,8 +1002,8 @@ static Janet br_Page_ClosePathEofillStroke(int32_t argc, Janet *argv) {
 static Janet br_Page_Skew(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_Skew(page, a, b);
   return janet_wrap_integer(ret);
 }
@@ -1026,12 +1018,12 @@ static Janet br_Page_GRestore(int32_t argc, Janet *argv) {
 static Janet br_Page_CurveTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x1 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y1 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x2 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y2 = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL x1 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y1 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x2 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y2 = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Page_CurveTo(page, x1, y1, x2, y2, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -1039,8 +1031,8 @@ static Janet br_Page_CurveTo(int32_t argc, Janet *argv) {
 static Janet br_Page_Scale(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL sx = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL sy = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL sx = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL sy = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_Scale(page, sx, sy);
   return janet_wrap_integer(ret);
 }
@@ -1062,7 +1054,7 @@ static Janet br_Page_LineCap(int32_t argc, Janet *argv) {
 static Janet br_Page_SetGrayStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetGrayStroke(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1070,8 +1062,8 @@ static Janet br_Page_SetGrayStroke(int32_t argc, Janet *argv) {
 static Janet br_Page_Translate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL dx = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL dy = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL dx = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL dy = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_Translate(page, dx, dy);
   return janet_wrap_integer(ret);
 }
@@ -1136,10 +1128,10 @@ static Janet br_Page_ClosePathFillStroke(int32_t argc, Janet *argv) {
 static Janet br_Page_CurveTo2(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x2 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y2 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x2 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y2 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_CurveTo2(page, x2, y2, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -1147,7 +1139,7 @@ static Janet br_Page_CurveTo2(int32_t argc, Janet *argv) {
 static Janet br_Page_SetLineWidth(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL line_width = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL line_width = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetLineWidth(page, line_width);
   return janet_wrap_integer(ret);
 }
@@ -1155,10 +1147,10 @@ static Janet br_Page_SetLineWidth(int32_t argc, Janet *argv) {
 static Janet br_Page_SetCMYKStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL m = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL k = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL m = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL k = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_SetCMYKStroke(page, c, m, y, k);
   return janet_wrap_integer(ret);
 }
@@ -1166,10 +1158,10 @@ static Janet br_Page_SetCMYKStroke(int32_t argc, Janet *argv) {
 static Janet br_Page_Rectangle(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL width = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL height = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL width = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL height = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_Rectangle(page, x, y, width, height);
   return janet_wrap_integer(ret);
 }
@@ -1177,7 +1169,7 @@ static Janet br_Page_Rectangle(int32_t argc, Janet *argv) {
 static Janet br_Page_SetMiterLimit(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL miter_limit = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL miter_limit = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetMiterLimit(page, miter_limit);
   return janet_wrap_integer(ret);
 }
@@ -1185,10 +1177,10 @@ static Janet br_Page_SetMiterLimit(int32_t argc, Janet *argv) {
 static Janet br_Page_SetCMYKFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL m = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL k = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL m = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL k = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Page_SetCMYKFill(page, c, m, y, k);
   return janet_wrap_integer(ret);
 }
@@ -1203,7 +1195,7 @@ static Janet br_Page_Stroke(int32_t argc, Janet *argv) {
 static Janet br_Page_SetFlat(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL flatness = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL flatness = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetFlat(page, flatness);
   return janet_wrap_integer(ret);
 }
@@ -1211,9 +1203,9 @@ static Janet br_Page_SetFlat(int32_t argc, Janet *argv) {
 static Janet br_Page_Circle(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL radius = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL radius = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Page_Circle(page, x, y, radius);
   return janet_wrap_integer(ret);
 }
@@ -1221,9 +1213,9 @@ static Janet br_Page_Circle(int32_t argc, Janet *argv) {
 static Janet br_Page_SetRGBStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Page_SetRGBStroke(page, r, g, b);
   return janet_wrap_integer(ret);
 }
@@ -1231,9 +1223,9 @@ static Janet br_Page_SetRGBStroke(int32_t argc, Janet *argv) {
 static Janet br_Page_SetRGBFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Page_SetRGBFill(page, r, g, b);
   return janet_wrap_integer(ret);
 }
@@ -1263,7 +1255,7 @@ static Janet br_Page_Eofill(int32_t argc, Janet *argv) {
 static Janet br_Page_RotateDeg(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL degrees = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL degrees = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_RotateDeg(page, degrees);
   return janet_wrap_integer(ret);
 }
@@ -1278,7 +1270,7 @@ static Janet br_Page_Fill(int32_t argc, Janet *argv) {
 static Janet br_Page_Rotate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL radians = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL radians = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_Rotate(page, radians);
   return janet_wrap_integer(ret);
 }
@@ -1300,7 +1292,7 @@ static Janet br_Page_Clip(int32_t argc, Janet *argv) {
 static Janet br_Page_SetGrayFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetGrayFill(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1420,8 +1412,8 @@ static Janet br_Page_SetSlideShow(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
   BRST_PageTransition type = (BRST_PageTransition)janet_getinteger(argv, 1);
-  BRST_REAL disp_time = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL trans_time = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL disp_time = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL trans_time = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Page_SetSlideShow(page, type, disp_time, trans_time);
   return janet_wrap_integer(ret);
 }
@@ -1430,10 +1422,10 @@ static Janet br_Page_SetBoundary(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 6);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
   BRST_PageBoundary boundary = (BRST_PageBoundary)janet_getinteger(argv, 1);
-  BRST_REAL left = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL bottom = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL right = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL top = (BRST_REAL)janet_getfloat(argv, 5);
+  BRST_REAL left = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL bottom = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL right = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL top = (BRST_REAL)janet_getnumber(argv, 5);
   BRST_STATUS ret = BRST_Page_SetBoundary(page, boundary, left, bottom, right, top);
   return janet_wrap_integer(ret);
 }
@@ -1441,7 +1433,7 @@ static Janet br_Page_SetBoundary(int32_t argc, Janet *argv) {
 static Janet br_Page_SetHorizontalScaling(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetHorizontalScaling(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1464,7 +1456,7 @@ static Janet br_Page_Insert_Shared_Content_Stream(int32_t argc, Janet *argv) {
 static Janet br_Page_SetHeight(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetHeight(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1486,7 +1478,7 @@ static Janet br_Page_Height(int32_t argc, Janet *argv) {
 static Janet br_Page_SetZoom(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL zoom = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL zoom = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetZoom(page, zoom);
   return janet_wrap_integer(ret);
 }
@@ -1503,7 +1495,7 @@ static Janet br_Page_SetSize(int32_t argc, Janet *argv) {
 static Janet br_Page_SetWidth(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetWidth(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1536,7 +1528,7 @@ static Janet br_Stream_FillStroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetGrayFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetGrayFill(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1544,10 +1536,10 @@ static Janet br_Stream_SetGrayFill(int32_t argc, Janet *argv) {
 static Janet br_Stream_Rectangle(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL width = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL height = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL width = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL height = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Stream_Rectangle(page, x, y, width, height);
   return janet_wrap_integer(ret);
 }
@@ -1562,10 +1554,10 @@ static Janet br_Stream_GSave(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetCMYKFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL m = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL k = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL m = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL k = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Stream_SetCMYKFill(page, c, m, y, k);
   return janet_wrap_integer(ret);
 }
@@ -1583,7 +1575,7 @@ static Janet br_Stream_SetRGBFillUint(int32_t argc, Janet *argv) {
 static Janet br_Stream_Rotate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL radians = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL radians = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_Rotate(page, radians);
   return janet_wrap_integer(ret);
 }
@@ -1598,12 +1590,12 @@ static Janet br_Stream_EofillStroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_CurveTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x1 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y1 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x2 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y2 = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL x1 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y1 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x2 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y2 = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Stream_CurveTo(page, x1, y1, x2, y2, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -1611,12 +1603,12 @@ static Janet br_Stream_CurveTo(int32_t argc, Janet *argv) {
 static Janet br_Stream_Concat(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL d = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL d = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Stream_Concat(page, a, b, c, d, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1638,9 +1630,9 @@ static Janet br_Stream_ClosePathFillStroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetRGBFill(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Stream_SetRGBFill(page, r, g, b);
   return janet_wrap_integer(ret);
 }
@@ -1648,10 +1640,10 @@ static Janet br_Stream_SetRGBFill(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetCMYKStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL m = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL k = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL m = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL k = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Stream_SetCMYKStroke(page, c, m, y, k);
   return janet_wrap_integer(ret);
 }
@@ -1666,7 +1658,7 @@ static Janet br_Stream_ClosePath(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetGrayStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetGrayStroke(page, value);
   return janet_wrap_integer(ret);
 }
@@ -1674,10 +1666,10 @@ static Janet br_Stream_SetGrayStroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_CurveTo2(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x2 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y2 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x2 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y2 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Stream_CurveTo2(page, x2, y2, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -1687,7 +1679,7 @@ static Janet br_Stream_SetDash(int32_t argc, Janet *argv) {
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
   BRST_DASH_PATTERN dash_pattern = (BRST_DASH_PATTERN)janet_getpointer(argv, 1);
   BRST_UINT num_elem = (BRST_UINT)janet_getuinteger(argv, 2);
-  BRST_REAL phase = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL phase = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Stream_SetDash(page, dash_pattern, num_elem, phase);
   return janet_wrap_integer(ret);
 }
@@ -1695,7 +1687,7 @@ static Janet br_Stream_SetDash(int32_t argc, Janet *argv) {
 static Janet br_Stream_RotateDeg(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL degrees = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL degrees = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_RotateDeg(page, degrees);
   return janet_wrap_integer(ret);
 }
@@ -1703,10 +1695,10 @@ static Janet br_Stream_RotateDeg(int32_t argc, Janet *argv) {
 static Janet br_Stream_CurveTo3(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x1 = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y1 = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL x3 = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL y3 = (BRST_REAL)janet_getfloat(argv, 4);
+  BRST_REAL x1 = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y1 = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL x3 = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL y3 = (BRST_REAL)janet_getnumber(argv, 4);
   BRST_STATUS ret = BRST_Stream_CurveTo3(page, x1, y1, x3, y3);
   return janet_wrap_integer(ret);
 }
@@ -1722,7 +1714,7 @@ static Janet br_Stream_SetLineCap(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetFlat(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL flatness = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL flatness = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetFlat(page, flatness);
   return janet_wrap_integer(ret);
 }
@@ -1737,9 +1729,9 @@ static Janet br_Stream_Eoclip(int32_t argc, Janet *argv) {
 static Janet br_Stream_Circle(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL radius = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL radius = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Stream_Circle(page, x, y, radius);
   return janet_wrap_integer(ret);
 }
@@ -1757,8 +1749,8 @@ static Janet br_Stream_SetRGBStrokeUint(int32_t argc, Janet *argv) {
 static Janet br_Stream_Scale(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL sx = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL sy = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL sx = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL sy = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_Scale(page, sx, sy);
   return janet_wrap_integer(ret);
 }
@@ -1773,8 +1765,8 @@ static Janet br_Stream_GRestore(int32_t argc, Janet *argv) {
 static Janet br_Stream_LineTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_LineTo(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1782,8 +1774,8 @@ static Janet br_Stream_LineTo(int32_t argc, Janet *argv) {
 static Janet br_Stream_MoveTo(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_MoveTo(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1798,7 +1790,7 @@ static Janet br_Stream_ClosePathEofillStroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetLineWidth(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL line_width = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL line_width = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetLineWidth(page, line_width);
   return janet_wrap_integer(ret);
 }
@@ -1829,8 +1821,8 @@ static Janet br_Stream_SetLineJoin(int32_t argc, Janet *argv) {
 static Janet br_Stream_Translate(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL dx = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL dy = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL dx = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL dy = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_Translate(page, dx, dy);
   return janet_wrap_integer(ret);
 }
@@ -1853,7 +1845,7 @@ static Janet br_Stream_SetRGBFillHex(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetMiterLimit(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL miter_limit = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL miter_limit = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetMiterLimit(page, miter_limit);
   return janet_wrap_integer(ret);
 }
@@ -1868,8 +1860,8 @@ static Janet br_Stream_Stroke(int32_t argc, Janet *argv) {
 static Janet br_Stream_Skew(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_Skew(page, a, b);
   return janet_wrap_integer(ret);
 }
@@ -1884,9 +1876,9 @@ static Janet br_Stream_EndPath(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetRGBStroke(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL r = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL g = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL r = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL g = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_STATUS ret = BRST_Stream_SetRGBStroke(page, r, g, b);
   return janet_wrap_integer(ret);
 }
@@ -1902,12 +1894,12 @@ static Janet br_Stream_Clip(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetTextMatrix(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Stream stream = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL d = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL d = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Stream_SetTextMatrix(stream, a, b, c, d, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1916,8 +1908,8 @@ static Janet br_Stream_TextOut(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 5);
   BRST_Stream stream = (BRST_Stream)janet_getpointer(argv, 0);
   BRST_Font font = (BRST_Font)janet_getpointer(argv, 1);
-  BRST_REAL xpos = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL ypos = (BRST_REAL)janet_getfloat(argv, 3);
+  BRST_REAL xpos = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL ypos = (BRST_REAL)janet_getnumber(argv, 3);
   BRST_CSTR text = (BRST_CSTR)janet_getstring(argv, 4);
   BRST_STATUS ret = BRST_Stream_TextOut(stream, font, xpos, ypos, text);
   return janet_wrap_integer(ret);
@@ -1926,8 +1918,8 @@ static Janet br_Stream_TextOut(int32_t argc, Janet *argv) {
 static Janet br_Stream_MoveTextPos2(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream stream = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_MoveTextPos2(stream, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1966,7 +1958,7 @@ static Janet br_Stream_MoveToNextLine(int32_t argc, Janet *argv) {
 static Janet br_Stream_SetTextLeading(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream stream = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Stream_SetTextLeading(stream, value);
   return janet_wrap_integer(ret);
 }
@@ -1981,8 +1973,8 @@ static Janet br_Stream_EndText(int32_t argc, Janet *argv) {
 static Janet br_Stream_MoveTextPos(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Stream stream = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Stream_MoveTextPos(stream, x, y);
   return janet_wrap_integer(ret);
 }
@@ -1991,8 +1983,8 @@ static Janet br_Stream_MoveTextPos(int32_t argc, Janet *argv) {
 static Janet br_Page_TextOut(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL xpos = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL ypos = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL xpos = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL ypos = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_CSTR text = (BRST_CSTR)janet_getstring(argv, 3);
   BRST_STATUS ret = BRST_Page_TextOut(page, xpos, ypos, text);
   return janet_wrap_integer(ret);
@@ -2024,7 +2016,7 @@ static Janet br_Page_WordSpace(int32_t argc, Janet *argv) {
 static Janet br_Page_SetTextRise(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetTextRise(page, value);
   return janet_wrap_integer(ret);
 }
@@ -2033,7 +2025,7 @@ static Janet br_Page_SetFontAndSize(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
   BRST_Font font = (BRST_Font)janet_getpointer(argv, 1);
-  BRST_REAL size = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL size = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_SetFontAndSize(page, font, size);
   return janet_wrap_integer(ret);
 }
@@ -2041,8 +2033,8 @@ static Janet br_Page_SetFontAndSize(int32_t argc, Janet *argv) {
 static Janet br_Page_MoveTextPos2(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_MoveTextPos2(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -2071,7 +2063,7 @@ static Janet br_Page_CurrentFontSize(int32_t argc, Janet *argv) {
 static Janet br_Page_SetCharSpace(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetCharSpace(page, value);
   return janet_wrap_integer(ret);
 }
@@ -2100,8 +2092,8 @@ static Janet br_Page_MoveToNextLine(int32_t argc, Janet *argv) {
 static Janet br_Page_ShowTextNextLineEx(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 4);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL word_space = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL char_space = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL word_space = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL char_space = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_CSTR text = (BRST_CSTR)janet_getstring(argv, 3);
   BRST_STATUS ret = BRST_Page_ShowTextNextLineEx(page, word_space, char_space, text);
   return janet_wrap_integer(ret);
@@ -2110,7 +2102,7 @@ static Janet br_Page_ShowTextNextLineEx(int32_t argc, Janet *argv) {
 static Janet br_Page_SetTextLeading(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetTextLeading(page, value);
   return janet_wrap_integer(ret);
 }
@@ -2133,7 +2125,7 @@ static Janet br_Dict_SetFontAndSize(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Dict dict = (BRST_Dict)janet_getpointer(argv, 0);
   BRST_Font font = (BRST_Font)janet_getpointer(argv, 1);
-  BRST_REAL size = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL size = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Dict_SetFontAndSize(dict, font, size);
   return janet_wrap_integer(ret);
 }
@@ -2141,8 +2133,8 @@ static Janet br_Dict_SetFontAndSize(int32_t argc, Janet *argv) {
 static Janet br_Page_MoveTextPos(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 3);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 2);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 2);
   BRST_STATUS ret = BRST_Page_MoveTextPos(page, x, y);
   return janet_wrap_integer(ret);
 }
@@ -2150,12 +2142,12 @@ static Janet br_Page_MoveTextPos(int32_t argc, Janet *argv) {
 static Janet br_Page_SetTextMatrix(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 7);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL a = (BRST_REAL)janet_getfloat(argv, 1);
-  BRST_REAL b = (BRST_REAL)janet_getfloat(argv, 2);
-  BRST_REAL c = (BRST_REAL)janet_getfloat(argv, 3);
-  BRST_REAL d = (BRST_REAL)janet_getfloat(argv, 4);
-  BRST_REAL x = (BRST_REAL)janet_getfloat(argv, 5);
-  BRST_REAL y = (BRST_REAL)janet_getfloat(argv, 6);
+  BRST_REAL a = (BRST_REAL)janet_getnumber(argv, 1);
+  BRST_REAL b = (BRST_REAL)janet_getnumber(argv, 2);
+  BRST_REAL c = (BRST_REAL)janet_getnumber(argv, 3);
+  BRST_REAL d = (BRST_REAL)janet_getnumber(argv, 4);
+  BRST_REAL x = (BRST_REAL)janet_getnumber(argv, 5);
+  BRST_REAL y = (BRST_REAL)janet_getnumber(argv, 6);
   BRST_STATUS ret = BRST_Page_SetTextMatrix(page, a, b, c, d, x, y);
   return janet_wrap_integer(ret);
 }
@@ -2171,7 +2163,7 @@ static Janet br_Page_ShowTextNextLine(int32_t argc, Janet *argv) {
 static Janet br_Page_SetWordSpace(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_REAL value = (BRST_REAL)janet_getfloat(argv, 1);
+  BRST_REAL value = (BRST_REAL)janet_getnumber(argv, 1);
   BRST_STATUS ret = BRST_Page_SetWordSpace(page, value);
   return janet_wrap_integer(ret);
 }
