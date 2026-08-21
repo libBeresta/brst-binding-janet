@@ -36,8 +36,8 @@
 #          cmake --build build
 #
 
-project(brst-binding-template)
 cmake_minimum_required(VERSION 3.20)
+project(brst-binding-janet VERSION 1.0.1)
 
 find_program(
     ECL_EXE
