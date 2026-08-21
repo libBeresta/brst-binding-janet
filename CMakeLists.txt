@@ -134,8 +134,10 @@ install(FILES
 )
 
 # Add project folders to include to bundle
-# install(DIRECTORY "src"   DESTINATION .)
-# install(DIRECTORY "tests" DESTINATION .)
+install(DIRECTORY "src"    DESTINATION .)
+install(DIRECTORY "brst"   DESTINATION .)
+install(DIRECTORY "bundle" DESTINATION .)
+install(DIRECTORY "demos"  DESTINATION .)
 
 # Tell CPack to create a zip file.
 set(CPACK_GENERATOR "TGZ")
@@ -155,6 +157,6 @@ add_custom_command(
   TARGET bundle
   COMMAND "${CMAKE_COMMAND}" --build . --target package
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-  COMMENT "Bundling libBeresta language binding package"
+  COMMENT "Bundling libBeresta Janet language binding package"
   VERBATIM
 )
