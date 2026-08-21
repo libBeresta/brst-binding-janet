@@ -56,7 +56,6 @@
 (jnt/require-cmake)
 (jnt/require-git)
 
-(jnt/git "clone" "https://github.com/libBeresta/libBeresta.git" "ext/libBeresta")
 
 # Папка сборки
 (def- brst-build-dir (path/join "_build"))
@@ -66,6 +65,10 @@
                                      (jnt/gen-static-libname bundle-name)))
 
 (def- brst-cmake-cache (path/join brst-build-dir "CMakeCache.txt"))
+
+(if (not (sh/exists? brst-cmake-cache))
+  (jnt/git "clone" "https://github.com/libBeresta/libBeresta.git" "ext/libBeresta"))
+
 
 # Флаги сборки
 (def- cmake-flags @["-B" brst-build-dir "-G" "Ninja"
