@@ -126,6 +126,8 @@ add_custom_command(
 
 file(READ "version" VER)
 
+include(CPack)
+
 install(FILES
      "LICENSE"
      "README.md"
@@ -150,8 +152,6 @@ set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 
 # Apparently this should be always on but isn't for backwards compatibility.
 set(CPACK_VERBATIM_VARIABLES YES)
-
-include(CPack)
 
 add_custom_command(
   TARGET bundle
