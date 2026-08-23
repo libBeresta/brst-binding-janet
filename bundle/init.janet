@@ -111,7 +111,7 @@
       bin    (cmake-cache-line "libbrst_BINARY_DIR")]
   (set cflags @[(string "-I" (path/join source "include")) (string "-I" (path/join bin "include"))])
   (set lflags (case (os/which)
-		:linux @[(path/join bin "src" (jnt/gen-static-libname bundle-name)) "-lpng"]
+		:linux @[(path/join bin "src" (jnt/gen-static-libname bundle-name)) "-lpng" "-lz"]
 		nil)))
 
 (declare-source
