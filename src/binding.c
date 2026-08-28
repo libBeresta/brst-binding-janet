@@ -974,16 +974,6 @@ static Janet br_Page_GrayFill(int32_t argc, Janet *argv) {
   return janet_wrap_number(ret);
 }
 
-static Janet br_Page_SetDash(int32_t argc, Janet *argv) {
-  janet_fixarity(argc, 4);
-  BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
-  BRST_DASH_PATTERN dash_pattern = (BRST_DASH_PATTERN)janet_getpointer(argv, 1);
-  BRST_UINT num_elem = (BRST_UINT)janet_getuinteger(argv, 2);
-  BRST_REAL phase = (BRST_REAL)janet_getnumber(argv, 3);
-  BRST_STATUS ret = BRST_Page_SetDash(page, dash_pattern, num_elem, phase);
-  return janet_wrap_integer(ret);
-}
-
 static Janet br_Page_SetRGBStrokeHex(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Page page = (BRST_Page)janet_getpointer(argv, 0);
@@ -1674,16 +1664,6 @@ static Janet br_Stream_CurveTo2(int32_t argc, Janet *argv) {
   return janet_wrap_integer(ret);
 }
 
-static Janet br_Stream_SetDash(int32_t argc, Janet *argv) {
-  janet_fixarity(argc, 4);
-  BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
-  BRST_DASH_PATTERN dash_pattern = (BRST_DASH_PATTERN)janet_getpointer(argv, 1);
-  BRST_UINT num_elem = (BRST_UINT)janet_getuinteger(argv, 2);
-  BRST_REAL phase = (BRST_REAL)janet_getnumber(argv, 3);
-  BRST_STATUS ret = BRST_Stream_SetDash(page, dash_pattern, num_elem, phase);
-  return janet_wrap_integer(ret);
-}
-
 static Janet br_Stream_RotateDeg(int32_t argc, Janet *argv) {
   janet_fixarity(argc, 2);
   BRST_Stream page = (BRST_Stream)janet_getpointer(argv, 0);
@@ -2213,6 +2193,8 @@ static Janet br_XObject_Stream(int32_t argc, Janet *argv) {
   return janet_wrap_pointer(ret);
 }
 
+#include "custom.c"
+
 static const JanetReg cfuns[] = {
   // asian.lsp
   {"doc-usekrfonts", br_Doc_UseKRFonts, "(brst/doc-usekrfonts pdf)\n\nEnable Korean fonts. Application can use following fonts after call:\\n\\n  | Font name            |\\n  | ---------            |\\n  | DotumChe             |\\n  | DotumChe,Bold        |\\n  | DotumChe,Italic      |\\n  | DotumChe,BoldItalic  |\\n  | Dotum                |\\n  | Dotum,Bold           |\\n  | Dotum,Italic         |\\n  | Dotum,BoldItalic     |\\n  | BatangChe            |\\n  | BatangChe,Bold       |\\n  | BatangChe,Italic     |\\n  | BatangChe,BoldItalic |\\n  | Batang               |\\n  | Batang,Bold          |\\n  | Batang,Italic        |\\n  | Batang,BoldItalic    |"},
@@ -2355,7 +2337,6 @@ static const JanetReg cfuns[] = {
   {"page-setrgbfilluint", br_Page_SetRGBFillUint, "(brst/page-setrgbfilluint page r g b)\n\nSet fill color (RGB) using \\ref BRST_UINT8 values."},
   {"page-eofillstroke", br_Page_EofillStroke, "(brst/page-eofillstroke page)\n\nFill current path using the even-odd rule and then paint the path."},
   {"page-grayfill", br_Page_GrayFill, "(brst/page-grayfill page)\n\nGet page current fill color value (Gray).\\n  BRST_Page_GrayFill() is valid only when the page's fill color space is \\ref BRST_CS_DEVICE_GRAY."},
-  {"page-setdash", br_Page_SetDash, "(brst/page-setdash page dash_pattern num_elem phase)\n\nSet dash pattern for lines in the page.\\n\\n  \\par Examples\\n\\n  'dash_ptn = NULL', 'num_elem = 0', 'phase = 0' (default for new page)\\n\\n  \\image html setdash1.png\\n\\n  'dash_ptn = [3]', 'num_elem = 1', 'phase = 1'\\n\\n  \\image html setdash2.png\\n\\n  'dash_ptn = [7,]', 'num_elem = 2', 'phase = 2'\\n\\n  \\image html setdash3.png\\n\\n  'dash_ptn = [8,]', 'num_elem = 4', 'phase = 0'\\n\\n  \\image html setdash4.png"},
   {"page-setrgbstrokehex", br_Page_SetRGBStrokeHex, "(brst/page-setrgbstrokehex page rgb)\n\nSet stroke color (RGB) using \\ref BRST_UINT32 value."},
   {"page-closepatheofillstroke", br_Page_ClosePathEofillStroke, "(brst/page-closepatheofillstroke page)\n\nClose current path, fill current path using the even-odd rule and then paint the path."},
   {"page-skew", br_Page_Skew, "(brst/page-skew page a b)\n\nConcatenate the page's transformation matrix with skew matrix.\\n\\n  Coordinate system is skewed by an angle \\c a at \\a x axis and by angle \\c b at \\a y axis."},
@@ -2442,7 +2423,6 @@ static const JanetReg cfuns[] = {
   {"stream-closepath", br_Stream_ClosePath, "(brst/stream-closepath page)\n\nClose the current subpath by appending a straight line segment from the current point to the starting point of the subpath."},
   {"stream-setgraystroke", br_Stream_SetGrayStroke, "(brst/stream-setgraystroke page value)\n\nSet stroke color (gray)."},
   {"stream-curveto2", br_Stream_CurveTo2, "(brst/stream-curveto2 page x2 y2 x3 y3)\n\nAppend Bézier curve to current path using current point and (x<sub>2</sub>, y<sub>2</sub>)\\n  and (x<sub>3</sub>, y<sub>3</sub>) as control points. Then current point is set to (x<sub>3</sub>, y<sub>3</sub>).\\n\\n  \\image html img/curveto2.png"},
-  {"stream-setdash", br_Stream_SetDash, "(brst/stream-setdash page dash_pattern num_elem phase)\n\nSet dash pattern for lines in the page.\\n\\n  \\par Examples\\n\\n  'dash_ptn = NULL', 'num_elem = 0', 'phase = 0' (default for new page)\\n\\n  \\image html setdash1.png\\n\\n  'dash_ptn = [3]', 'num_elem = 1', 'phase = 1'\\n\\n  \\image html setdash2.png\\n\\n  'dash_ptn = [7,]', 'num_elem = 2', 'phase = 2'\\n\\n  \\image html setdash3.png\\n\\n  'dash_ptn = [8,]', 'num_elem = 4', 'phase = 0'\\n\\n  \\image html setdash4.png"},
   {"stream-rotatedeg", br_Stream_RotateDeg, "(brst/stream-rotatedeg page degrees)\n\nConcatenate the page's transformation matrix with rotate matrix.\\n\\n  The coordinate system axes are rotated counterclockwise by angle \\с degrees (in degrees)."},
   {"stream-curveto3", br_Stream_CurveTo3, "(brst/stream-curveto3 page x1 y1 x3 y3)\n\nAppend a cubic Bézier curve to the current path using control points\\n  (x<sub>1</sub>, y<sub>1</sub>) and (x<sub>3</sub>, y<sub>3</sub>), then set current point\\n  to (x<sub>3</sub>, y<sub>3</sub>).\\n\\n  \\image html img/curveto3.png."},
   {"stream-setlinecap", br_Stream_SetLineCap, "(brst/stream-setlinecap page line_cap)\n\nSet lines endpoints shape style."},
@@ -2511,6 +2491,8 @@ static const JanetReg cfuns[] = {
   {"unicodetoglyphname", br_UnicodeToGlyphName, "(brst/unicodetoglyphname unicode)\n\nFor given symbol code return Unicode glyph name.\\n  If no glyph name found (in library) value \\c .notdef is returned."},
   // xobject.lsp
   {"xobject-stream", br_XObject_Stream, "(brst/xobject-stream xobj)\n\nReturns XObject object's stream. Stream is used for geometry commands write and similar."},
+
+  #include "custom-def.c"
 
   {NULL, NULL, NULL}
 };
