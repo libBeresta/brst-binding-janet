@@ -109,7 +109,7 @@
 # Получаем данные о расположении target
 (let [source (cmake-cache-line "libbrst_SOURCE_DIR")
       bin    (cmake-cache-line "libbrst_BINARY_DIR")]
-  (set cflags @[(string "-I" (path/join source "include")) (string "-I" (path/join bin "include"))])
+  (set cflags @[(string "-I" (path/join source "include")) (string "-I" (path/join bin "include")) "-I."])
   (set lflags (case (os/which)
 		:linux @[(path/join bin "src" (jnt/gen-static-libname bundle-name)) "-lpng" "-lz"]
 		nil)))
