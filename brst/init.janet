@@ -23,3 +23,18 @@
              ,font-name (doc-ttfont-loadfromfile ,pdf-var ,f-name 1)
 	         ,font-var  (doc-font ,pdf-var ,font-name "UTF-8")]
 	   ,;body))))
+
+
+(defmacro with-page-gsave 
+  [page-var & body]
+  ~(do
+     (page-gsave ,page-var)
+     ,;body
+     (page-grestore ,page-var)))
+
+(defmacro with-stream-gsave 
+  [stream-var & body]
+  ~(do
+     (stream-gsave ,stream-var)
+     ,;body
+     (stream-grestore ,stream-var)))
