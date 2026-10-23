@@ -11,7 +11,7 @@ typedef void*
 
 typedef BRST_STATUS
 (*SetDashFn)(
-    BRST_Stream      stream,
+    void*            stream,
     const BRST_REAL* dash_pattern,
     BRST_UINT        num_elem,
     BRST_REAL        phase
